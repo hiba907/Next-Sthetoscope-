@@ -1,7 +1,7 @@
 baseURL: "https://example.org/"
 languageCode: "en-us"
 title: "The Next Stethoscope"
-theme: "mytheme"
+disableTheme: true
 params:
   publisher: "MLS Academy"
   tagline: "Discovering medicine, outside the textbook."
