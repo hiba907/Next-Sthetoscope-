@@ -1,0 +1,48 @@
+{{ define "main" }}
+<article class="issue">
+
+  <div class="issue-meta-bar">
+    <span>{{ .Params.issue_label }}</span>
+    <span>{{ .Date.Format "January 2006" | upper }}</span>
+  </div>
+
+  <div class="eyebrow">Featured Conversation</div>
+  <h1 class="issue-title">{{ .Title }}</h1>
+  {{ with .Params.dek }}<p class="issue-dek">{{ . }}</p>{{ end }}
+
+  {{ with .Params.editorial }}
+  <section class="editorial-block">
+    <div class="eyebrow">Editorial</div>
+    <div class="editorial-text">{{ . | markdownify }}</div>
+    {{ with $.Params.editor_name }}<p class="editorial-sign">— {{ . }}, Editor</p>{{ end }}
+  </section>
+  {{ end }}
+
+  <section class="guest-block">
+    <div class="guest-photo">
+      <img src="{{ .Params.guest_photo | default "images/guest_placeholder.jpg" | relURL }}" alt="{{ .Params.guest_name }}">
+    </div>
+    <div class="guest-info">
+      <div class="eyebrow">Featured Guest</div>
+      <h2 class="guest-name">{{ .Params.guest_name }}</h2>
+      <p class="guest-title">{{ .Params.guest_title }}</p>
+      <p class="guest-intro">{{ .Params.guest_intro }}</p>
+    </div>
+  </section>
+
+  <section class="conversation">
+    <div class="conversation-label">The Conversation</div>
+    {{ range .Params.qa }}
+    <div class="qa-row">
+      <div class="qa-question">{{ .q }}</div>
+      <div class="qa-answer">{{ .a }}</div>
+    </div>
+    {{ end }}
+  </section>
+
+  <div class="issue-footer">
+    {{ $.Site.Title }} · {{ .Params.issue_label }} · {{ .Date.Format "January 2006" }}
+  </div>
+
+</article>
+{{ end }}
