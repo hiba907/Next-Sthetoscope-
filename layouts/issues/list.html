@@ -1,0 +1,12 @@
+{{ define "main" }}
+<h1 class="page-title">All Issues</h1>
+<div class="issue-grid">
+  {{ range .Pages.ByDate.Reverse }}
+  <a class="issue-card" href="{{ .RelPermalink }}">
+    <div class="issue-card-meta">{{ .Params.issue_label }} · {{ .Date.Format "January 2006" }}</div>
+    <div class="issue-card-title">{{ .Title }}</div>
+    <div class="issue-card-guest">{{ .Params.guest_name }}</div>
+  </a>
+  {{ end }}
+</div>
+{{ end }}
