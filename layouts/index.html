@@ -1,0 +1,28 @@
+{{ define "main" }}
+{{ $issues := where .Site.RegularPages "Type" "issues" }}
+{{ $issues = $issues.ByDate.Reverse }}
+{{ with $issues }}
+  {{ $latest := index . 0 }}
+  <section class="hero">
+    <div class="eyebrow">Latest Issue</div>
+    <h1 class="hero-title">{{ $latest.Title }}</h1>
+    {{ with $latest.Params.dek }}<p class="hero-dek">{{ . }}</p>{{ end }}
+    <div class="hero-byline">WITH {{ $latest.Params.guest_name | upper }}</div>
+    <div class="hero-role">{{ $latest.Params.guest_title }}</div>
+    <a class="btn" href="{{ $latest.RelPermalink }}">Read This Issue →</a>
+  </section>
+{{ end }}
+
+<section class="archive-preview">
+  <h2 class="section-title">Past Issues</h2>
+  <div class="issue-grid">
+    {{ range $issues }}
+    <a class="issue-card" href="{{ .RelPermalink }}">
+      <div class="issue-card-meta">{{ .Params.issue_label }} · {{ .Date.Format "January 2006" }}</div>
+      <div class="issue-card-title">{{ .Title }}</div>
+      <div class="issue-card-guest">{{ .Params.guest_name }}</div>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
